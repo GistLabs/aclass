@@ -16,10 +16,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npx react-scripts build",
+    "cy.run": "npx cypress run",
+    "cy.open": "npx cypress open",
+    "test-integration": "start-server-and-test start http://localhost:3000 cy.run",
     "test": "react-scripts test",
-    "integration-test": "npx cypress run",
-    "cypress": "npx cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
