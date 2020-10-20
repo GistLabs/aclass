@@ -3,6 +3,10 @@ version: '3'
 services:
     react:
       build: .
+      ports:
+        - 3000:80
+      environment:
+        - REACT_APP_API=web
 
 
 networks:
