@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - npm ci 
+  build:
+    commands:
+      - npm test
+      - REACT_APP_API=${STAGING_API} npm run build
+      - mv build build_staging
+      - aws s3 cp --recursive --acl public-read ./build_staging s3://${STAGING_BUCKET}
+      - npx cypress run --config baseUrl=${STAGING_WEBSITE}
+      - REACT_APP_API=${PROD_API} npm run build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build

@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${IMAGE_REPO_NAME}
+      - docker build --build-arg database_url=${DATABASE_URL} -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} .      
+  build:
+    commands:
+      - docker run --rm ${IMAGE_REPO_NAME}:${IMAGE_TAG} python -m unittest discover todo/unittests
+      - docker run --rm ${IMAGE_REPO_NAME}:${IMAGE_TAG} python manage.py test todo/integrationtests
+      - sed -i "s;REPOSITORY_URI;${IMAGE_REPO_NAME};g" Dockerrun.aws.json
+      - docker push ${IMAGE_REPO_NAME}:${IMAGE_TAG}
+
+artifacts:
+  files:
+    - 'Dockerrun.aws.json'

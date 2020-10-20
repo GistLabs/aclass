@@ -1,0 +1,26 @@
+version: '3'
+    
+services:
+    db:
+        image: postgres:13
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+    web:
+        build: 
+            context: .
+            network: host
+        command: ./wait-for-postgres.sh db:5432 -- ./start_with_migration.sh
+        environment:
+            - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+        volumes:
+            - .:/code
+        ports:
+            - 8000:8000
+        depends_on:
+            - db
