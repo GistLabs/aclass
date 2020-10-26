@@ -1,11 +1,11 @@
-PYBIN=venv/bin
+PYBIN=.venv/bin
 
-venv: venv/bin/activate
+venv: .venv/bin/activate
 
-venv/bin/activate: requirements.txt
-	test -d venv || python3 -m venv venv
+.venv/bin/activate: requirements.txt
+	test -d venv || python3 -m venv .venv
 	. $(PYBIN)/activate; pip install -Ur requirements.txt
-	touch venv/bin/activate
+	touch .venv/bin/activate
 
 test: venv
 	. $(PYBIN)/activate; python -m unittest discover todo/unittests

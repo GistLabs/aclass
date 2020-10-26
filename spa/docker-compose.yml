@@ -6,7 +6,7 @@ services:
       ports:
         - 3000:80
       environment:
-        - REACT_APP_API=web
+        - REACT_APP_API=localhost:8000
 
 
 networks:

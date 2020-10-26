@@ -17,6 +17,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npx react-scripts build",
+    "build-docker-prod": "docker build . -t class/spa",
+    "deploy": "kubectl delete pod -l app=spa; kubectl apply -f infrastructure/spa.yml",
+    "bind-spa-locally": "kubectl port-forward service/spa 3000:80",
     "cy.run": "npx cypress run",
     "cy.open": "npx cypress open",
     "docker-compose": "docker-compose up --build",

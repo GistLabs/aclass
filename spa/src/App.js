@@ -5,7 +5,7 @@ import Modal from "./components/Modal";
 import axios from "axios";
 
 const config = {
-  apiServer: process.env.REACT_APP_API
+  apiServer: process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:8000'
 }
 
 class App extends Component {
