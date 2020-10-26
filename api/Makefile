@@ -47,7 +47,7 @@ clean:
 build-docker:
 	docker build . --tag class/api
 
-# CD
+# Continous Delivery
 deploy: test integration-test build-docker
 	kubectl delete pod -l app=api
 	kubectl apply -f infrastructure/api.yml
