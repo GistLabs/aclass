@@ -17,5 +17,6 @@ class TodoSerializer(serializers.ModelSerializer):
     title = TitleField()
 
     class Meta:
+        
         model = Todo
         fields = ('id', 'title', 'description', 'priority', 'completed')
