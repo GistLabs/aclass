@@ -28,6 +28,8 @@ makesuperuser:
 oneclickbuild: 
 	docker-compose up --build
 
+coverage: 
+	. $(PYBIN)/activate; coverage run -m unittest discover todo/unittests; coverage report -m
 db-up:
 	docker-compose up db -d
 
