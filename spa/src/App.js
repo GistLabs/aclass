@@ -27,7 +27,7 @@ class App extends Component {
   }
   refreshList = () => {
     axios
-      .get(`${config.apiServer}/api/todos/`)
+      .get(`${config.apiServer}/api/v1/todos/`)
       .then(res => this.setState({ todoList: res.data }))
       .catch(err => console.log(err));
   };
@@ -99,17 +99,17 @@ class App extends Component {
     this.toggle();
     if (item.id) {
       axios
-        .put(`${config.apiServer}/api/todos/${item.id}/`, item)
+        .put(`${config.apiServer}/api/v1/todos/${item.id}/`, item)
         .then(res => this.refreshList());
       return;
     }
     axios
-      .post(`${config.apiServer}/api/todos/`, item)
+      .post(`${config.apiServer}/api/v1/todos/`, item)
       .then(res => this.refreshList());
   };
   handleDelete = item => {
     axios
-      .delete(`${config.apiServer}/api/todos/${item.id}`)
+      .delete(`${config.apiServer}/api/v1/todos/${item.id}`)
       .then(res => this.refreshList());
   };
   createItem = () => {

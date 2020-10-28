@@ -11,7 +11,8 @@ router = routers.DefaultRouter()
 router.register(r'todos', views.TodoView, 'todo')
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/api')),
+    path('api/', RedirectView.as_view(url='/api/v1/')),
+    path('', RedirectView.as_view(url='/api/v1/')),
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/v1/', include(router.urls))
 ]

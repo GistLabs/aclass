@@ -12,10 +12,10 @@ class ViewTestCase(APITestCase):
         """Test the api has bucket creation capability."""
         todo_data = {'title': 'Go to Ibiza and buy fudge',
                      'description': 'Ibiza todo', 'completed': False}
-        response = self.client.post('/api/todos/', todo_data)
+        response = self.client.post('/api/v1/todos/', todo_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        get_response = self.client.get('/api/todos/1/')
+        get_response = self.client.get('/api/v1/todos/1/')
 
         self.assertEqual(get_response.status_code, status.HTTP_200_OK)
         self.assertEqual(
